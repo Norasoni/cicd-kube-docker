@@ -57,17 +57,20 @@ pipeline {
 
         }
 
-       // stage("Upload image"){
-         //  steps{
-  //            script{
-    //               echo 'Starting to push'
-      //              docker.withRegistry('https://hub.docker.com/','dockerhub')
-       //             echo 'logged in'
-           //         dockerImage.push("V$BUILD_NUMBER")
-         //           dockerImage.push("latest")
-           //     }
-           // }
-        //}
+        stage("Upload image"){
+           steps{
+              script{
+                echo 'Starting to push'
+                docker.withRegistry('https://hub.docker.com/','dockerhub'){
+                    echo 'logged in'
+                    dockerImage.push("V$BUILD_NUMBER")
+                    dockerImage.push("latest")
+
+                }
+                
+            }
+        }
+    }
 
         stage("Remove unused docker images"){
             steps{
@@ -78,7 +81,7 @@ pipeline {
         stage("Kubernetes Deploy"){
             agent {label 'KOPS'}
                 steps{
-                    sh "helm upgrade --install --force vprofile-stack helm/vprofilecharts --set appimage=${registry}:V${BUILD_NUMBER} --namespace prod"
+                    sh "helm upgrade --install --force vprofile-stack helm/vprofilecharts --set appimage=${registry}:V${BUILD_NUMBER}"
                 }
         }
 
