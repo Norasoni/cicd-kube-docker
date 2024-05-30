@@ -47,7 +47,6 @@ pipeline {
             }
         }
 
-        
 
         stage('Build Docker App Image'){
             steps {
@@ -61,7 +60,6 @@ pipeline {
         stage("Upload image"){
             steps{
                 script{
-                    docker.withRegistry('',registryCredential)
                     dockerImage.push("V$BUILD_NUMBER")
                     dockerImage.push("latest")
                 }
