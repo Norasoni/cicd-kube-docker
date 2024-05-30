@@ -57,17 +57,17 @@ pipeline {
 
         }
 
-        #stage("Upload image"){
-         #   steps{
-          #      script{
-           #         echo 'Starting to push'
-            #        docker.withRegistry('https://hub.docker.com/','dockerhub')
-             #       echo 'logged in'
-              #      dockerImage.push("V$BUILD_NUMBER")
-               #     dockerImage.push("latest")
-               # }
-            #}
-        #}
+       // stage("Upload image"){
+         //  steps{
+  //            script{
+    //               echo 'Starting to push'
+      //              docker.withRegistry('https://hub.docker.com/','dockerhub')
+       //             echo 'logged in'
+           //         dockerImage.push("V$BUILD_NUMBER")
+         //           dockerImage.push("latest")
+           //     }
+           // }
+        //}
 
         stage("Remove unused docker images"){
             steps{
