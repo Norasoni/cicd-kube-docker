@@ -62,7 +62,7 @@ pipeline {
                 script{
                     echo 'Starting to push'
                     docker.withRegistry('https://registry.hub.docker.com/','dockerhub')
-
+                    echo 'logged in'
                     dockerImage.push("V$BUILD_NUMBER")
                     dockerImage.push("latest")
                 }
