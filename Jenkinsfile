@@ -61,7 +61,8 @@ pipeline {
             steps{
                 script{
                     echo 'Starting to push'
-                    docker.withRegistry('',registryCredential)
+                    docker.withRegistry('https://registry.hub.docker.com/','dockerhub')
+
                     dockerImage.push("V$BUILD_NUMBER")
                     dockerImage.push("latest")
                 }
